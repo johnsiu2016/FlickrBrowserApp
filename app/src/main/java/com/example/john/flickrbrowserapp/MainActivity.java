@@ -2,11 +2,22 @@ package com.example.john.flickrbrowserapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = "MainActivity";
+    private List<Photo> mPhotoList = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private FlickrRecyclerViewAdapter flickrRecyclerViewAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,19 +25,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        GetData getData = new GetData("https://api.flickr.com/services/feeds/photos_public.gne?tags=%22android%22&format=json&nojsoncallback=1");
-        GetFlickrJsonData getFlickrJsonData = new GetFlickrJsonData("android", true);
-        getFlickrJsonData.execute();
+        ProcessPhotos processPhotos = new ProcessPhotos("android", true);
+        processPhotos.execute();
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     @Override
@@ -49,5 +53,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public class ProcessPhotos extends GetFlickrJsonData {
+
+        public ProcessPhotos(String searchCriteria, boolean matchAll) {
+            super(searchCriteria, matchAll);
+        }
+
+        @Override
+        public void execute() {
+            super.execute();
+            ProcessData processData = new ProcessData();
+            processData.execute();
+        }
+
+        public class ProcessData extends DownloadJsonData {
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                flickrRecyclerViewAdapter = new FlickrRecyclerViewAdapter(MainActivity.this, getmPhotos());
+                mRecyclerView.setAdapter(flickrRecyclerViewAdapter);
+            }
+        }
     }
 }

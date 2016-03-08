@@ -24,6 +24,10 @@ public class GetFlickrJsonData extends GetData{
         mPhotos = new ArrayList<>();
     }
 
+    public List<Photo> getmPhotos() {
+        return mPhotos;
+    }
+
     public void execute() {
         super.setmURL(mDestinationUri.toString());
         DownloadJsonData downloadJsonData = new DownloadJsonData();
@@ -94,7 +98,8 @@ public class GetFlickrJsonData extends GetData{
     public class DownloadJsonData extends DownloadData {
         @Override
         protected String doInBackground(String... params) {
-            return super.doInBackground(params);
+            String[] par = {mDestinationUri.toString()};
+            return super.doInBackground(par);
         }
 
         @Override
