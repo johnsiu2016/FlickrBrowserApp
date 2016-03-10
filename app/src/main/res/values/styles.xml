@@ -14,7 +14,7 @@
         <item name="android:windowBackground">@color/flickrBackgroundColor</item>
     </style>
 
-    <style name="Theme.Flickr" parent="Theme.Base"/>
+    <style name="Theme.Flickr" parent="Theme.Base" />
 
     <style name="ActionBarThemeOverlay" parent="">
         <item name="android:textColorPrimary">@color/flickrPrimaryTextColor</item>
@@ -38,5 +38,9 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.Flickr.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Flickr.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

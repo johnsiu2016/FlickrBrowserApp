@@ -1,7 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:flickr="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.john.flickrbrowserapp.MainActivity">
+    xmlns:flickr="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_settings"
@@ -9,9 +8,10 @@
         android:title="@string/action_settings"
         flickr:showAsAction="never" />
 
-    <item android:id="@+id/menu_search"
-        android:icon="@android:drawable/ic_menu_search"
+    <item android:id="@+id/search_view"
         android:title="@string/menu_search"
+        android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="1"
-        flickr:showAsAction="always"/>
+        flickr:showAsAction="always"
+        flickr:actionViewClass="android.support.v7.widget.SearchView" />
 </menu>
