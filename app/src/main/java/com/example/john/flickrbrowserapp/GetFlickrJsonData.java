@@ -24,7 +24,7 @@ public class GetFlickrJsonData extends GetData{
         mPhotos = new ArrayList<>();
     }
 
-    public List<Photo> getmPhotos() {
+    public List<Photo> getPhotos() {
         return mPhotos;
     }
 
